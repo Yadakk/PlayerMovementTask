@@ -11,6 +11,8 @@ public class PlayerInput : MonoBehaviour
 
     private PlayerInvoker _invoker;
 
+    private bool _rotateFlag;
+
     private void Awake()
     {
         _playerControls = new();
@@ -26,6 +28,7 @@ public class PlayerInput : MonoBehaviour
 
     private void OnEnable()
     {
+        _rotateFlag = false;
         _playerControls.Player.Enable();
     }
 
@@ -57,6 +60,12 @@ public class PlayerInput : MonoBehaviour
 
     private void OnRotateHandler(InputAction.CallbackContext context)
     {
+        if (!_rotateFlag)
+        {
+            _rotateFlag = true;
+            return;
+        }
+
         _invoker.Rotate(context.ReadValue<Vector2>());
     }
 
