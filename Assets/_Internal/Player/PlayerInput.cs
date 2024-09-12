@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
 {
+    public GameObject ControlsStateDisplayer;
+
     private PlayerControls _playerControls;
 
     private PlayerInvoker _invoker;
@@ -71,6 +73,7 @@ public class PlayerInput : MonoBehaviour
     private void OnToggleControlsHandler(InputAction.CallbackContext context)
     {
         enabled = !enabled;
+        ControlsStateDisplayer.SetActive(!enabled);
     }
 
     private void OnLockCursorHandler(InputAction.CallbackContext context)
