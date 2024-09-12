@@ -7,6 +7,23 @@ public class PlayerInput : MonoBehaviour
 {
     public GameObject ControlsStateDisplayer;
 
+    private bool _playerControlsEnabled;
+    public bool PlayerControlsEnabled
+    {
+        get => _playerControlsEnabled;
+        set
+        {
+            if (value)
+                _playerControls.Player.Enable();
+            else
+                _playerControls.Player.Disable();
+
+            ControlsStateDisplayer.SetActive(!value);
+
+            _playerControlsEnabled = value;
+        }
+    }
+
     private PlayerControls _playerControls;
 
     private PlayerInvoker _invoker;
@@ -24,17 +41,6 @@ public class PlayerInput : MonoBehaviour
         _playerControls.Toggler.OnLockCursor.started += OnLockCursorHandler;
 
         _playerControls.Toggler.Enable();
-    }
-
-    private void OnEnable()
-    {
-        _rotateFlag = false;
-        _playerControls.Player.Enable();
-    }
-
-    private void OnDisable()
-    {
-        _playerControls.Player.Disable();
     }
 
     private void FixedUpdate()
@@ -81,12 +87,12 @@ public class PlayerInput : MonoBehaviour
 
     private void OnToggleControlsHandler(InputAction.CallbackContext context)
     {
-        enabled = !enabled;
-        ControlsStateDisplayer.SetActive(!enabled);
+        PlayerControlsEnabled = !PlayerControlsEnabled;
     }
 
     private void OnLockCursorHandler(InputAction.CallbackContext context)
     {
         Cursor.lockState = CursorLockMode.Locked;
+        PlayerControlsEnabled = true;
     }
 }
