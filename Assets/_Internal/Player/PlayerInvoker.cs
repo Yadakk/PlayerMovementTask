@@ -18,7 +18,7 @@ public class PlayerInvoker
 
     public void Rotate(Vector2 delta)
     {
-        PlayerMovement.Rotate(_player.transform, delta);
+        PlayerMovement.Rotate(_player.transform, delta * _player.Sensitivity);
     }
 
     public void Jump()

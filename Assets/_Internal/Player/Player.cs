@@ -8,6 +8,9 @@ public class Player : MonoBehaviour
     [Header("Move")]
     public float MoveSpeed = 1f;
 
+    [Header("Rotate")]
+    public float Sensitivity = 0.5f;
+
     [Header("Jump")]
     public float JumpForce = 10f;
 
