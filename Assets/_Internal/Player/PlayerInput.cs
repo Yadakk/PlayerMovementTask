@@ -41,6 +41,7 @@ public class PlayerInput : MonoBehaviour
         _playerControls.Toggler.OnLockCursor.started += OnLockCursorHandler;
 
         _playerControls.Toggler.Enable();
+        PlayerControlsEnabled = true;
     }
 
     private void FixedUpdate()
