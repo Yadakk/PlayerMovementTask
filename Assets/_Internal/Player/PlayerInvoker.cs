@@ -13,7 +13,7 @@ public class PlayerInvoker
 
     public void Move(Vector2 direction)
     {
-        PlayerMovement.Move(_player.RigidBody, direction);
+        PlayerMovement.Move(_player.RigidBody, direction * _player.MoveSpeed);
     }
 
     public void Rotate(Vector2 delta)

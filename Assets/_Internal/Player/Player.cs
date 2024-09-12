@@ -5,6 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
+    [Header("Move")]
+    public float MoveSpeed = 1f;
+
     [Header("Jump")]
     public float JumpForce = 10f;
 

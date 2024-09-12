@@ -787,6 +787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d8e9b8684ab3a04b821f1de19a8cb0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MoveSpeed: 1
   JumpForce: 250
   Throwable: {fileID: 5544193337482282589, guid: 256ae95082867e3469a5a1bf053f9436, type: 3}
   ThrowableParent: {fileID: 362117963}
