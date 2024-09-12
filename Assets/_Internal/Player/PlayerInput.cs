@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
@@ -33,10 +32,10 @@ public class PlayerInput : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ApplyMovement();
+        CallMovement();
     }
 
-    private void ApplyMovement()
+    private void CallMovement()
     {
         Vector2 direction = _playerControls.Player.OnMove.ReadValue<Vector2>();
         OnMoveHandler(direction);
