@@ -15,17 +15,14 @@ public static class PlayerMovement
         playerTransform.Rotate(new(0f, delta.x, 0f));
 
         Transform cameraTransform = Camera.main.transform;
-
         cameraTransform.RotateAround(playerTransform.position, playerTransform.right, delta.y);
-
-        //ClampCameraRotation(cameraTransform);
-    }
-
-    private static void ClampCameraRotation(Transform cameraTransform)
-    {
-        Vector3 euler = cameraTransform.eulerAngles;
-        euler.y = Mathf.Clamp(cameraTransform.eulerAngles.y, -90f, 90f);
-        cameraTransform.eulerAngles = euler;
+        if (cameraTransform.rotation.eulerAngles.z > 90f) //Is camera upside down
+        {
+            if (delta.y > 0)
+                cameraTransform.RotateAround(playerTransform.position, playerTransform.right, cameraTransform.rotation.eulerAngles.x - 90f);
+            else
+                cameraTransform.RotateAround(playerTransform.position, playerTransform.right, cameraTransform.rotation.eulerAngles.x - 270f);
+        }
     }
 
     public static void Jump(Rigidbody rb, float force)
