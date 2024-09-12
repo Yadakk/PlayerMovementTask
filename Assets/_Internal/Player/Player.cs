@@ -14,10 +14,9 @@ public class Player : MonoBehaviour
     [Header("Jump")]
     public float JumpForce = 10f;
 
-    [Header("Throw")]
-    public GameObject Throwable;
-    public Transform ThrowableParent;
-    public float ThrowForce = 10f;
+    [Header("Bullet")]
+    public GameObject BulletGameObject;
+    public Transform BulletParent;
 
     public bool IsGrounded { get; private set; }
 

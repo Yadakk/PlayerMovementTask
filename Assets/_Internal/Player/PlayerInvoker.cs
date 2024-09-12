@@ -29,7 +29,10 @@ public class PlayerInvoker
 
     public void Throw()
     {
-        GameObject throwable = Object.Instantiate(_player.Throwable, _player.ThrowableParent);
-        GameObjectThrower.Throw(throwable.GetComponent<Rigidbody>(), Camera.main.transform.forward * _player.ThrowForce, _player.RigidBody);
+        Object.Instantiate(
+            _player.BulletGameObject, 
+            _player.transform.position, 
+            Quaternion.Euler(Camera.main.transform.rotation.eulerAngles.x, _player.transform.rotation.eulerAngles.y, 0f), 
+            _player.BulletParent);
     }
 }
