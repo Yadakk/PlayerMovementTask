@@ -17,7 +17,7 @@ public class PlayerInput : MonoBehaviour
         _playerControls.Player.OnRotate.started += OnRotateHandler;
         _playerControls.Player.OnThrow.started += OnThrowHandler;
         _playerControls.Toggler.OnToggleControls.started += OnToggleControlsHandler;
-        _playerControls.Toggler.OnLockCursor.started += OnToggleControlsHandler;
+        _playerControls.Toggler.OnLockCursor.started += OnLockCursorHandler;
 
         _playerControls.Toggler.Enable();
     }
@@ -71,5 +71,10 @@ public class PlayerInput : MonoBehaviour
     private void OnToggleControlsHandler(InputAction.CallbackContext context)
     {
         enabled = !enabled;
+    }
+
+    private void OnLockCursorHandler(InputAction.CallbackContext context)
+    {
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }
