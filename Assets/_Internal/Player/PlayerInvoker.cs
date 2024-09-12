@@ -29,9 +29,7 @@ public class PlayerInvoker
 
     public void Throw()
     {
-        GameObject throwable = Object.Instantiate(_player.Throwable, _player.transform.position, Quaternion.identity, _player.ThrowableParent);
-        Rigidbody throwableRb = throwable.GetComponent<Rigidbody>();
-        throwableRb.velocity = _player.RigidBody.velocity;
-        GameObjectThrower.Throw(throwableRb, Camera.main.transform.forward * _player.ThrowForce);
+        GameObject throwable = Object.Instantiate(_player.Throwable, _player.ThrowableParent);
+        GameObjectThrower.Throw(throwable.GetComponent<Rigidbody>(), Camera.main.transform.forward * _player.ThrowForce, _player.RigidBody);
     }
 }
