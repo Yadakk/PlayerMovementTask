@@ -15,7 +15,9 @@ public class PlayerInput : MonoBehaviour
 
         _playerControls.Player.OnJump.started += OnJumpHandler;
         _playerControls.Player.OnRotate.started += OnRotateHandler;
+        _playerControls.Player.OnThrow.started += OnThrowHandler;
         _playerControls.Toggler.OnToggleControls.started += OnToggleControlsHandler;
+        _playerControls.Toggler.OnLockCursor.started += OnToggleControlsHandler;
 
         _playerControls.Toggler.Enable();
     }
@@ -59,6 +61,11 @@ public class PlayerInput : MonoBehaviour
     private void OnJumpHandler(InputAction.CallbackContext context)
     {
         _invoker.Jump();
+    }
+
+    private void OnThrowHandler(InputAction.CallbackContext context)
+    {
+        _invoker.Throw();
     }
 
     private void OnToggleControlsHandler(InputAction.CallbackContext context)

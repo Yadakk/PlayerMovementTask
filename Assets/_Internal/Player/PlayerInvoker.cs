@@ -26,4 +26,12 @@ public class PlayerInvoker
         if (!_player.IsGrounded) return;
         PlayerMovement.Jump(_player.RigidBody, _player.JumpForce);
     }
+
+    public void Throw()
+    {
+        GameObject throwable = Object.Instantiate(_player.Throwable, _player.transform.position, Quaternion.identity, _player.ThrowableParent);
+        Rigidbody throwableRb = throwable.GetComponent<Rigidbody>();
+        throwableRb.velocity = _player.RigidBody.velocity;
+        GameObjectThrower.Throw(throwableRb, Camera.main.transform.forward * _player.ThrowForce);
+    }
 }

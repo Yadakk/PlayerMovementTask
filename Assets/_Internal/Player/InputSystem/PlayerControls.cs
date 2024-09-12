@@ -167,6 +167,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OnLockCursor"",
+                    ""type"": ""Button"",
+                    ""id"": ""02aa67a2-09a8-401d-8dc1-3a34c15c958e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -178,6 +187,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""OnToggleControls"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bb1bd71b-af7e-46fa-b7a6-372b8b90adf2"",
+                    ""path"": ""<Mouse>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OnLockCursor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -195,6 +215,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // Toggler
         m_Toggler = asset.FindActionMap("Toggler", throwIfNotFound: true);
         m_Toggler_OnToggleControls = m_Toggler.FindAction("OnToggleControls", throwIfNotFound: true);
+        m_Toggler_OnLockCursor = m_Toggler.FindAction("OnLockCursor", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -327,11 +348,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Toggler;
     private List<ITogglerActions> m_TogglerActionsCallbackInterfaces = new List<ITogglerActions>();
     private readonly InputAction m_Toggler_OnToggleControls;
+    private readonly InputAction m_Toggler_OnLockCursor;
     public struct TogglerActions
     {
         private @PlayerControls m_Wrapper;
         public TogglerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @OnToggleControls => m_Wrapper.m_Toggler_OnToggleControls;
+        public InputAction @OnLockCursor => m_Wrapper.m_Toggler_OnLockCursor;
         public InputActionMap Get() { return m_Wrapper.m_Toggler; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -344,6 +367,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @OnToggleControls.started += instance.OnOnToggleControls;
             @OnToggleControls.performed += instance.OnOnToggleControls;
             @OnToggleControls.canceled += instance.OnOnToggleControls;
+            @OnLockCursor.started += instance.OnOnLockCursor;
+            @OnLockCursor.performed += instance.OnOnLockCursor;
+            @OnLockCursor.canceled += instance.OnOnLockCursor;
         }
 
         private void UnregisterCallbacks(ITogglerActions instance)
@@ -351,6 +377,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @OnToggleControls.started -= instance.OnOnToggleControls;
             @OnToggleControls.performed -= instance.OnOnToggleControls;
             @OnToggleControls.canceled -= instance.OnOnToggleControls;
+            @OnLockCursor.started -= instance.OnOnLockCursor;
+            @OnLockCursor.performed -= instance.OnOnLockCursor;
+            @OnLockCursor.canceled -= instance.OnOnLockCursor;
         }
 
         public void RemoveCallbacks(ITogglerActions instance)
@@ -378,5 +407,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface ITogglerActions
     {
         void OnOnToggleControls(InputAction.CallbackContext context);
+        void OnOnLockCursor(InputAction.CallbackContext context);
     }
 }
