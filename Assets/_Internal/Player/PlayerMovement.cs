@@ -10,19 +10,15 @@ public static class PlayerMovement
         rb.AddForce(rotatedDirection, ForceMode.Impulse);
     }
 
-    public static void Rotate(Transform playerTransform, Vector2 delta)
+    public static void Rotate(Transform playerTransform, Vector2 delta, LimitedRotation limitedRotation)
     {
         playerTransform.Rotate(new(0f, delta.x, 0f));
 
         Transform cameraTransform = Camera.main.transform;
-        cameraTransform.RotateAround(playerTransform.position, playerTransform.right, delta.y);
-        if (cameraTransform.rotation.eulerAngles.z > 90f) //Is camera upside down
-        {
-            if (delta.y > 0)
-                cameraTransform.RotateAround(playerTransform.position, playerTransform.right, cameraTransform.rotation.eulerAngles.x - 90f);
-            else
-                cameraTransform.RotateAround(playerTransform.position, playerTransform.right, cameraTransform.rotation.eulerAngles.x - 270f);
-        }
+        limitedRotation.RotateAround(
+            cameraTransform, 
+            Vector3.right, playerTransform.position, 
+            delta.y, -90f, 90f);
     }
 
     public static void Jump(Rigidbody rb, float force)

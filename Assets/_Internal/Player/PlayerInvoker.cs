@@ -6,6 +6,8 @@ public class PlayerInvoker
 {
     private readonly Player _player;
 
+    private readonly LimitedRotation _limitedRotation = new();
+
     public PlayerInvoker(Player player)
     {
         _player = player;
@@ -18,7 +20,7 @@ public class PlayerInvoker
 
     public void Rotate(Vector2 delta)
     {
-        PlayerMovement.Rotate(_player.transform, delta * _player.Sensitivity);
+        PlayerMovement.Rotate(_player.transform, delta * _player.Sensitivity, _limitedRotation);
     }
 
     public void Jump()
